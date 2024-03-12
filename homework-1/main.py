@@ -33,22 +33,20 @@ try:
                                                                                   row['notes']))
         conn.commit()
 
-    with conn.cursor() as cur_two:
         rows = open_file("customers_data.csv")
         for row in rows:
-            cur_two.execute("INSERT INTO customers VALUES (%s, %s, %s)", (row['customer_id'],
-                                                                          row['company_name'],
-                                                                          row['contact_name']))
+            cur.execute("INSERT INTO customers VALUES (%s, %s, %s)", (row['customer_id'],
+                                                                      row['company_name'],
+                                                                      row['contact_name']))
         conn.commit()
 
-    with conn.cursor() as cur_three:
         rows = open_file("orders_data.csv")
         for row in rows:
-            cur_three.execute(f"INSERT INTO orders VALUES (%s, %s, %s, %s, %s)", (row['order_id'],
-                                                                                  row['employee_id'],
-                                                                                  row['customer_id'],
-                                                                                  row['order_date'],
-                                                                                  row['ship_city']))
+            cur.execute(f"INSERT INTO orders VALUES (%s, %s, %s, %s, %s)", (row['order_id'],
+                                                                            row['employee_id'],
+                                                                            row['customer_id'],
+                                                                            row['order_date'],
+                                                                            row['ship_city']))
         conn.commit()
 finally:
     conn.close()
